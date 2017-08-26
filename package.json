@@ -4,7 +4,8 @@
   "description": "create the development starter kit with webpack",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack -d --watch",
+    "build": "webpack -p"
   },
   "keywords": [
     "webpack",
