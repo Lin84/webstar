@@ -1,5 +1,5 @@
 {
-  "name": "web-start",
+  "name": "web-star",
   "version": "1.0.0",
   "description": "create the development starter kit with webpack",
   "main": "index.js",
@@ -9,11 +9,12 @@
   },
   "keywords": [
     "webpack",
-    "webstart"
+    "webstar"
   ],
   "author": "Linh Le Tuan",
   "license": "ISC",
   "devDependencies": {
+    "html-webpack-plugin": "^2.30.1",
     "webpack": "^3.5.5"
   }
 }
