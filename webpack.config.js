@@ -37,17 +37,19 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-        title: 'Demo',
+        title: 'Home page',
         // minify: {
         //     collapseWhitespace: true
         // },
         hash: true,
+        excludeChunks: ['contact'],
         template: './src/tpl/index.html'
         }),
         new HtmlWebpackPlugin({
         title: 'Contact Page',
         hash: true,
         filename: 'contact.html',
+        chunks: ['contact'],
         template: './src/tpl/contact.html'
         }),
         new ExtractTextPlugin({
