@@ -7,8 +7,12 @@ const isProd = process.env.NODE_ENV === 'production'; // true or false
 const cssDev = ['style-loader', 'css-loader', 'sass-loader'];
 const cssProd = ExtractTextPlugin.extract({
     fallback: 'style-loader',
-    use: ['css-loader', 'sass-loader'],
-    publicPath: '/dist'
+    /*
+        this publicPath cause problem with image loading in the production mode in css:
+        the pathe of the image in the css: /distimages/[image file]
+    */
+    // publicPath: '/dist',
+    use: ['css-loader', 'sass-loader']
 });
 
 const cssConfig = isProd ? cssProd : cssDev;
@@ -40,7 +44,9 @@ module.exports = {
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 use: [
-                    'file-loader?name=[name].[ext]&outputPath=images/',
+                    'file-loader?name=images/[name].[ext]',
+                    // 'file-loader?name=[name].[ext]&outputPath=images/&publicPath=images/',
+                    // 'file-loader?name=[name].[ext]&outputPath=images/',
                     'image-webpack-loader'
                 ]
             }
