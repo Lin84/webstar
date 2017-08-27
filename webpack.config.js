@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
     entry: {
@@ -15,11 +16,12 @@ module.exports = {
         rules: [
             {
                 test: /\.scss$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: ['css-loader', 'sass-loader'],
-                    publicPath: '/dist'
-                })
+                // use: ExtractTextPlugin.extract({
+                //     fallback: 'style-loader',
+                //     use: ['css-loader', 'sass-loader'],
+                //     publicPath: '/dist'
+                // })
+                use: ['style-loader', 'css-loader', 'sass-loader']
             },
             {
                 test: /\.js$/,
@@ -37,7 +39,8 @@ module.exports = {
         compress: true,
         port: 8484,
         stats: 'errors-only',
-        open: true
+        open: true,
+        hot: true
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -47,19 +50,21 @@ module.exports = {
         // },
         hash: true,
         excludeChunks: ['contact'],
-        template: './src/tpl/index.pug'
+        template: './src/tpl/index.html'
         }),
         new HtmlWebpackPlugin({
         title: 'Contact Page',
         hash: true,
         filename: 'contact.html',
         chunks: ['contact'],
-        template: './src/tpl/contact.html'
+        template: './src/tpl/contact.pug'
         }),
         new ExtractTextPlugin({
             filename: 'styles.css',
-            disable: false,
+            disable: true,
             allChunks: true
-        })
+        }),
+        new webpack.HotModuleReplacementPlugin(), // enable HMR globally
+        new webpack.NamedModulesPlugin()
     ]
 }
