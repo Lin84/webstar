@@ -38,8 +38,8 @@ module.exports = {
                 use: ['html-loader', 'pug-html-loader']
             },
             {
-                test: /\.(jpe?g|png|gif|svg)$/,
-                use: 'file-loader'
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                use: 'file-loader?name=[name].[ext]&outputPath=images/'
             }
         ]
     },
