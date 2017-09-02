@@ -54,7 +54,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(woff2?|svg)$/,
+                test: /\.(woff2?)$/,
                 use: 'url-loader?limit=10000&name=fonts/[name].[ext]'
             },
             {
