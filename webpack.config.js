@@ -27,7 +27,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname + '/dist'),
-        filename: '[name].bundle.js'
+        filename: 'app/[name].bundle.js'
     },
     module: {
         rules: [
@@ -48,7 +48,7 @@ module.exports = {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 use: [
                     'file-loader?name=images/[name].[ext]',
-                    // 'file-loader?name=[name].[ext]&outputPath=images/&publicPath=images/',
+                    // 'file-loader?name=[name].[ext]&outputPath=images/&publicPath=[path]',
                     // 'file-loader?name=[name].[ext]&outputPath=images/',
                     'image-webpack-loader'
                 ]
@@ -93,7 +93,7 @@ module.exports = {
         template: './src/tpl/contact.pug'
         }),
         new ExtractTextPlugin({
-            filename: '/css/[name].css',
+            filename: './css/[name].css',
             disable: !isProd,
             allChunks: true
         }),
