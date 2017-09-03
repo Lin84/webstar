@@ -28,8 +28,9 @@ module.exports = {
         bootstrap: bootstrapConfig
     },
     output: {
-        path: path.resolve(__dirname + '/dist'),
+        path: path.resolve(__dirname + 'dist'),
         filename: 'app/[name].bundle.js'
+        // publicPath: '/dist/app'
     },
     module: {
         rules: [
@@ -39,8 +40,19 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
-                use: 'babel-loader'
+                exclude: /(node_modules|bower_components)/,
+                use: [{
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            "react",
+                            "latest"
+                        ],
+                        plugins: [
+                            require('babel-plugin-transform-object-rest-spread')
+                        ]
+                    }
+                }]
             },
             {
                 test: /\.pug$/,
