@@ -10,7 +10,7 @@ Development starter kit with webpack 3
 npm install -g webpack
 ```
 ### Setup
-1. To clone the repository run interminal:
+1. To clone the repository run in terminal:
 
 ```sh
 git clone https://git@github.com:Lin84/webstar.git ./PROJECT_NAME
