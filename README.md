@@ -36,7 +36,7 @@ npm run dev
 If you want to revert back to a fresh state without built files, in the terminal run:
 
 ```sh
-npm clean
+npm run clean
 ```
 
 ### Production build
