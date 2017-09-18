@@ -17,7 +17,11 @@ npm install -g webpack
 
 ## Workflow
 ### Development
-To start your development process, run `npm run dev` in the terminal.
+To start your development process, in the terminal run:
+
+```sh
+npm run dev
+```
 
 ### Remove built targets
 If you want to revert back to a fresh state without built files, run
@@ -27,4 +31,8 @@ npm clean
 ```
 
 ### Production build
-To prepare production-ready files, run `npm run build` and grab built assets from `dist` folder.
+To prepare production-ready files, grab built assets from `dist` folder after run:
+
+```sh
+npm run build
+```
