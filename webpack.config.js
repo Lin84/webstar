@@ -14,7 +14,7 @@ const cssProd = ExtractTextPlugin.extract({
         this publicPath cause problem with image loading in the production mode in css:
         the pathe of the image in the css: /distimages/[image file]
     */
-    // publicPath: '/dist',
+    publicPath: '/dist',
     use: ['css-loader', 'sass-loader']
 });
 
@@ -28,7 +28,7 @@ module.exports = {
         bootstrap: bootstrapConfig
     },
     output: {
-        path: path.resolve(__dirname + 'dist'),
+        path: path.resolve(__dirname + '/dist'),
         filename: 'app/[name].bundle.js'
         // publicPath: '/dist/app'
     },
@@ -41,28 +41,22 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
-                use: [{
-                    loader: 'babel-loader',
-                    options: {
-                        presets: [
-                            "react",
-                            "latest"
-                        ],
-                        plugins: [
-                            require('babel-plugin-transform-object-rest-spread')
-                        ]
-                    }
-                }]
+                use: 'babel-loader'
             },
             {
                 test: /\.pug$/,
                 use: ['html-loader', 'pug-html-loader']
             },
             {
+                test: /\.(njk|nunjucks)$/,
+                loader: 'nunjucks-loader'
+            },
+            {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 use: [
+                    // 'file-loader?name=[name].[ext]&outputPath=images/&publicPath=./../',
                     'file-loader?name=images/[name].[ext]',
-                    // 'file-loader?name=[name].[ext]&outputPath=images/&publicPath=[path]',
+                     // 'file-loader?name=[name].[ext]&outputPath=images/&publicPath=[path]',
                     // 'file-loader?name=[name].[ext]&outputPath=images/',
                     'image-webpack-loader'
                 ]
@@ -86,7 +80,7 @@ module.exports = {
         compress: true,
         port: 8484,
         stats: 'errors-only',
-        // open: true,
+        open: true,
         hot: true
     },
     plugins: [
@@ -97,14 +91,14 @@ module.exports = {
         // },
         hash: true,
         excludeChunks: ['contact'],
-        template: './src/tpl/index.html'
-        }),
-        new HtmlWebpackPlugin({
-        title: 'Contact Page',
-        hash: true,
-        filename: 'contact.html',
-        chunks: ['contact'],
-        template: './src/tpl/contact.pug'
+        template: './src/tpl/index.nunj'
+    }),
+    new HtmlWebpackPlugin({
+    title: 'Contact Page',
+    hash: true,
+    filename: 'contact.html',
+    chunks: ['contact'],
+    template: './src/tpl/contact.pug'
         }),
         new ExtractTextPlugin({
             filename: './css/[name].css',
@@ -113,9 +107,9 @@ module.exports = {
         }),
         new webpack.HotModuleReplacementPlugin(), // enable HMR globally
         new webpack.NamedModulesPlugin(),
-        new PurifyCSSPlugin({
-            // Give paths to parse for rules. These should be absolute!
-            paths: glob.sync(path.join(__dirname, 'src/*.html'))
-        })
+        // new PurifyCSSPlugin({
+        //     // Give paths to parse for rules. These should be absolute!
+        //     paths: glob.sync(path.join(__dirname, 'src/*.html'))
+        // })
     ]
 }
