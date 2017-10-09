@@ -91,7 +91,7 @@ module.exports = {
         // },
         hash: true,
         excludeChunks: ['contact'],
-        template: './src/tpl/index.nunj'
+        template: './src/tpl/index.html'
     }),
     new HtmlWebpackPlugin({
     title: 'Contact Page',
