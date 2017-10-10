@@ -1,13 +1,13 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const path = require('path');
-const webpack = require('webpack');
-const bootstrapEntryPoints = require('./webpack.bootstrap.config');
-const glob = require('glob');
-const PurifyCSSPlugin = require('purifycss-webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin'),
+    ExtractTextPlugin = require('extract-text-webpack-plugin'),
+    path = require('path'),
+    webpack = require('webpack'),
+    bootstrapEntryPoints = require('./webpack.bootstrap.config'),
+    glob = require('glob'),
+    PurifyCSSPlugin = require('purifycss-webpack'),
+    isProd = process.env.NODE_ENV === 'production', // true or false
+    cssDev = ['style-loader', 'css-loader', 'sass-loader']
 
-const isProd = process.env.NODE_ENV === 'production'; // true or false
-const cssDev = ['style-loader', 'css-loader', 'sass-loader'];
 const cssProd = ExtractTextPlugin.extract({
     fallback: 'style-loader',
     /*
@@ -48,10 +48,6 @@ module.exports = {
                 use: ['html-loader', 'pug-html-loader']
             },
             {
-                test: /\.(njk|nunjucks)$/,
-                loader: 'nunjucks-loader'
-            },
-            {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 use: [
                     // 'file-loader?name=[name].[ext]&outputPath=images/&publicPath=./../',
@@ -80,32 +76,32 @@ module.exports = {
         compress: true,
         port: 8484,
         stats: 'errors-only',
-        open: true,
+        // open: true,
         hot: true
     },
     plugins: [
         new HtmlWebpackPlugin({
-        title: 'Home page',
-        // minify: {
-        //     collapseWhitespace: true
-        // },
-        hash: true,
-        excludeChunks: ['contact'],
-        template: './src/tpl/index.html'
-    }),
-    new HtmlWebpackPlugin({
-    title: 'Contact Page',
-    hash: true,
-    filename: 'contact.html',
-    chunks: ['contact'],
-    template: './src/tpl/contact.pug'
+            title: 'Home page',
+            // minify: {
+            //     collapseWhitespace: true
+            // },
+            hash: true,
+            excludeChunks: ['contact'],
+            template: './src/tpl/index.html'
+        }),
+        new HtmlWebpackPlugin({
+            title: 'Contact Page',
+            hash: true,
+            filename: 'contact.html',
+            chunks: ['contact'],
+            template: './src/tpl/contact.pug'
         }),
         new ExtractTextPlugin({
             filename: './css/[name].css',
             disable: !isProd,
             allChunks: true
         }),
-        new webpack.HotModuleReplacementPlugin(), // enable HMR globally
+        new webpack.HotModuleReplacementPlugin(), // enable hot module reloading globally
         new webpack.NamedModulesPlugin(),
         // new PurifyCSSPlugin({
         //     // Give paths to parse for rules. These should be absolute!
