@@ -26,7 +26,6 @@ const bootstrapConfig = isProd ? bootstrapEntryPoints.prod : bootstrapEntryPoint
 module.exports = {
     entry: {
         app: './src/app/app.js',
-        contact: './src/app/contact.js',
         bootstrap: bootstrapConfig
     },
     output: {

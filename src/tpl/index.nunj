@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>web startkit</title>
+    <title>webpack startkit</title>
 </head>
 <body>
-    <div>
-        {% include "./partials/headline.nunj" %}
+    <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-12">
+                <div id="root"></div>
             </div>
         </div>
         <div class="row">
@@ -21,7 +21,8 @@
                 {% include "./partials/modal.nunj" %}
                 {% include "./partials/dropdown.nunj" %}
             </div>
-        <div>
+        </div>
+
     </div>
 </body>
 </html>
