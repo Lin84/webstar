@@ -25,13 +25,13 @@ const bootstrapConfig = isProd ? bootstrapEntryPoints.prod : bootstrapEntryPoint
 
 module.exports = {
     entry: {
-        app: './src/app/app.js',
+        main: './src/scrips/main.js',
         bootstrap: bootstrapConfig
     },
     output: {
         path: path.resolve(__dirname + '/dist'),
-        filename: 'app/[name].bundle.js'
-        // publicPath: '/dist/app'
+        filename: 'scrips/[name].bundle.js'
+        // publicPath: '/dist/scrips'
     },
     module: {
         rules: [
@@ -77,7 +77,7 @@ module.exports = {
                         loader: 'nunjucks-html-loader',
                         options: {
                             'searchPaths': [
-                                'src/tpl'
+                                'src/templates'
                             ],
                         },
                     },
@@ -101,21 +101,21 @@ module.exports = {
         //     // },
         //     hash: true,
         //     excludeChunks: ['contact'],
-        //     template: './src/tpl/index.html'
+        //     template: './src/templates/index.html'
         // }),
         // new HtmlWebpackPlugin({
         //     title: 'Contact Page',
         //     hash: true,
         //     filename: 'contact.html',
         //     chunks: ['contact'],
-        //     template: './src/tpl/contact.pug'
+        //     template: './src/templates/contact.pug'
         // }),
         new HtmlWebpackPlugin({
             inject: 'body',
-            template: 'html-loader?interpolate!nunjucks-html-loader!' + path.resolve('./src', 'tpl/index.nunj'),
+            template: 'html-loader?interpolate!nunjucks-html-loader!' + path.resolve('./src', 'templates/index.nunj'),
         }),
         new ExtractTextPlugin({
-            filename: './css/[name].css',
+            filename: './styles/[name].css',
             disable: !isProd,
             allChunks: true
         }),
