@@ -1,3 +1,5 @@
+'use strict';
+
 const HtmlWebpackPlugin = require('html-webpack-plugin'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     path = require('path'),
@@ -68,6 +70,19 @@ module.exports = {
             {
                 test:/bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/,
                 use: 'imports-loader?jQuery=jquery'
+            },
+            {
+                test: /\.(njk|nunjucks|nunj)$/,
+                use: [
+                    {
+                        loader: 'nunjucks-html-loader',
+                        options: {
+                            'searchPaths': [
+                                'src/tpl'
+                            ],
+                        },
+                    },
+                ],
             }
         ]
     },
@@ -80,21 +95,25 @@ module.exports = {
         hot: true
     },
     plugins: [
+        // new HtmlWebpackPlugin({
+        //     title: 'Home page',
+        //     // minify: {
+        //     //     collapseWhitespace: true
+        //     // },
+        //     hash: true,
+        //     excludeChunks: ['contact'],
+        //     template: './src/tpl/index.html'
+        // }),
+        // new HtmlWebpackPlugin({
+        //     title: 'Contact Page',
+        //     hash: true,
+        //     filename: 'contact.html',
+        //     chunks: ['contact'],
+        //     template: './src/tpl/contact.pug'
+        // }),
         new HtmlWebpackPlugin({
-            title: 'Home page',
-            // minify: {
-            //     collapseWhitespace: true
-            // },
-            hash: true,
-            excludeChunks: ['contact'],
-            template: './src/tpl/index.html'
-        }),
-        new HtmlWebpackPlugin({
-            title: 'Contact Page',
-            hash: true,
-            filename: 'contact.html',
-            chunks: ['contact'],
-            template: './src/tpl/contact.pug'
+            inject: 'body',
+            template: 'html-loader?interpolate!nunjucks-html-loader!' + path.resolve('./src', 'tpl/index.nunj'),
         }),
         new ExtractTextPlugin({
             filename: './css/[name].css',
@@ -102,7 +121,7 @@ module.exports = {
             allChunks: true
         }),
         new webpack.HotModuleReplacementPlugin(), // enable hot module reloading globally
-        new webpack.NamedModulesPlugin(),
+        new webpack.NamedModulesPlugin()
         // new PurifyCSSPlugin({
         //     // Give paths to parse for rules. These should be absolute!
         //     paths: glob.sync(path.join(__dirname, 'src/*.html'))

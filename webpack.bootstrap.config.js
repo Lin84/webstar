@@ -1,3 +1,8 @@
+/**
+ * copy from: https://github.com/shakacode/bootstrap-loader/tree/master/examples/basic
+ */
+
+'use strict';
 const fs = require('fs');
 
 function getBootstraprcCustomLocation() {
