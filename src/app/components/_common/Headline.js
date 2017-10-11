@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Headline = (props) => {
     return (
-        <h1>Headline</h1>
+        <h1 className="headline">Headline</h1>
     );
 };
 
