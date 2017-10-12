@@ -12,14 +12,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'),
 
 const cssProd = ExtractTextPlugin.extract({
     fallback: 'style-loader',
-    /*
-        this publicPath cause problem with image loading in the production mode in css:
-        the pathe of the image in the css: /distimages/[image file]
-    */
+
+    /**
+     * this publicPath cause problem with image loading in the production mode in css:
+     * the pathe of the image in the css: /distimages/[image file]
+     */
     publicPath: '/dist',
+
     use: ['css-loader', 'sass-loader']
 });
 
+/**
+ * define the config either for production mode or development mode:
+ */
 const cssConfig = isProd ? cssProd : cssDev;
 const bootstrapConfig = isProd ? bootstrapEntryPoints.prod : bootstrapEntryPoints.dev;
 
@@ -45,16 +50,12 @@ module.exports = {
                 use: 'babel-loader'
             },
             {
-                test: /\.pug$/,
-                use: ['html-loader', 'pug-html-loader']
-            },
-            {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 use: [
                     // 'file-loader?name=[name].[ext]&outputPath=images/&publicPath=./../',
-                    'file-loader?name=images/[name].[ext]',
-                     // 'file-loader?name=[name].[ext]&outputPath=images/&publicPath=[path]',
+                    // 'file-loader?name=[name].[ext]&outputPath=images/&publicPath=[path]',
                     // 'file-loader?name=[name].[ext]&outputPath=images/',
+                    'file-loader?name=images/[name].[ext]',
                     'image-webpack-loader'
                 ]
             },
@@ -119,11 +120,24 @@ module.exports = {
             disable: !isProd,
             allChunks: true
         }),
-        new webpack.HotModuleReplacementPlugin(), // enable hot module reloading globally
-        new webpack.NamedModulesPlugin()
+
+        /**
+         * enable hot module reloading globally:
+         */
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin(),
+
+        /**
+         * Give paths to parse for rules. These should be absolute:
+         * for now it now working properly with the plugin "ExtractTextPlugin"
+         */
         // new PurifyCSSPlugin({
-        //     // Give paths to parse for rules. These should be absolute!
         //     paths: glob.sync(path.join(__dirname, 'src/*.html'))
         // })
+
+        /**
+         * to enable scope hoisting:
+         */
+        new webpack.optimize.ModuleConcatenationPlugin()
     ]
 }

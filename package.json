@@ -35,8 +35,6 @@
     "nunjucks": "^3.0.1",
     "nunjucks-html-loader": "^1.1.0",
     "nunjucks-loader": "^2.4.8",
-    "pug": "^2.0.0-rc.3",
-    "pug-html-loader": "^1.1.5",
     "purify-css": "^1.2.5",
     "purifycss-webpack": "^0.7.0",
     "react": "^16.0.0",
