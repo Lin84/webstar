@@ -1,8 +1,8 @@
 {
   "name": "web-star",
   "version": "1.0.0",
-  "description": "create the development starter kit with webpack",
-  "main": "index.js",
+  "description": "create the development start kit with webpack",
+  "main": "main.js",
   "scripts": {
     "dev": "webpack-dev-server",
     "build": "npm run clean && NODE_ENV=production webpack -p",
@@ -10,7 +10,7 @@
   },
   "keywords": [
     "webpack",
-    "webstar"
+    "startkit"
   ],
   "author": "Linh Le Tuan",
   "license": "ISC",
@@ -34,7 +34,6 @@
     "node-sass": "^4.5.3",
     "nunjucks": "^3.0.1",
     "nunjucks-html-loader": "^1.1.0",
-    "nunjucks-loader": "^2.4.8",
     "purify-css": "^1.2.5",
     "purifycss-webpack": "^0.7.0",
     "react": "^16.0.0",

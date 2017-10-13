@@ -111,10 +111,12 @@ module.exports = {
         //     chunks: ['contact'],
         //     template: './src/templates/contact.pug'
         // }),
+
         new HtmlWebpackPlugin({
             inject: 'body',
             template: 'html-loader?interpolate!nunjucks-html-loader!' + path.resolve('./src', 'templates/index.nunj'),
         }),
+
         new ExtractTextPlugin({
             filename: './styles/[name].css',
             disable: !isProd,
@@ -129,7 +131,7 @@ module.exports = {
 
         /**
          * Give paths to parse for rules. These should be absolute:
-         * for now it now working properly with the plugin "ExtractTextPlugin"
+         * for now it now working properly with the plugin "ExtractTextPlugin":
          */
         // new PurifyCSSPlugin({
         //     paths: glob.sync(path.join(__dirname, 'src/*.html'))
