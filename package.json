@@ -4,8 +4,8 @@
   "description": "create the development start kit with webpack",
   "main": "main.js",
   "scripts": {
-    "dev": "webpack-dev-server",
-    "build": "npm run clean && NODE_ENV=production webpack -p",
+    "dev": "webpack-dev-server --config ./webpack/webpack.config.js",
+    "build": "npm run clean && NODE_ENV=production webpack --config ./webpack/webpack.config.js -p",
     "clean": "rimraf ./dist/*"
   },
   "keywords": [

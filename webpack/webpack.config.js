@@ -8,19 +8,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'),
     glob = require('glob'),
     PurifyCSSPlugin = require('purifycss-webpack'),
     isProd = process.env.NODE_ENV === 'production', // true or false
-    cssDev = ['style-loader', 'css-loader', 'sass-loader']
+    cssDev = ['style-loader', 'css-loader', 'sass-loader'],
+    cssProd = ExtractTextPlugin.extract({
+        fallback: 'style-loader',
 
-const cssProd = ExtractTextPlugin.extract({
-    fallback: 'style-loader',
+        /**
+         * this publicPath cause problem with image loading in the production mode in css:
+         * the pathe of the image in the css: /distimages/[image file]
+         */
+        publicPath: '/dist',
 
-    /**
-     * this publicPath cause problem with image loading in the production mode in css:
-     * the pathe of the image in the css: /distimages/[image file]
-     */
-    publicPath: '/dist',
-
-    use: ['css-loader', 'sass-loader']
-});
+        use: ['css-loader', 'sass-loader']
+    });
 
 /**
  * define the config either for production mode or development mode:
@@ -30,11 +29,11 @@ const bootstrapConfig = isProd ? bootstrapEntryPoints.prod : bootstrapEntryPoint
 
 module.exports = {
     entry: {
-        main: './src/scrips/main.js',
-        bootstrap: bootstrapConfig
+        bootstrap: bootstrapConfig,
+        main: './src/scrips/main.js'
     },
     output: {
-        path: path.resolve(__dirname + '/dist'),
+        path: path.resolve(__dirname + './../dist'),
         filename: 'scrips/[name].bundle.js'
         // publicPath: '/dist/scrips'
     },
@@ -89,7 +88,7 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
-        port: 8484,
+        port: 1111,
         stats: 'errors-only',
         // open: true,
         hot: true
