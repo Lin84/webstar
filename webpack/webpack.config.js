@@ -29,13 +29,14 @@ const bootstrapConfig = isProd ? bootstrapEntryPoints.prod : bootstrapEntryPoint
 
 module.exports = {
     entry: {
-        bootstrap: bootstrapConfig,
-        main: './src/scrips/main.js'
+        main: './src/scrips/main.js',
+        vendors: [
+            bootstrapConfig
+        ]
     },
     output: {
         path: path.resolve(__dirname + './../dist'),
         filename: 'scrips/[name].bundle.js'
-        // publicPath: '/dist/scrips'
     },
     module: {
         rules: [
@@ -51,9 +52,6 @@ module.exports = {
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 use: [
-                    // 'file-loader?name=[name].[ext]&outputPath=images/&publicPath=./../',
-                    // 'file-loader?name=[name].[ext]&outputPath=images/&publicPath=[path]',
-                    // 'file-loader?name=[name].[ext]&outputPath=images/',
                     'file-loader?name=images/[name].[ext]',
                     'image-webpack-loader'
                 ]
@@ -87,33 +85,27 @@ module.exports = {
     },
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
-        compress: true,
+        compress: false,
         port: 1111,
         stats: 'errors-only',
-        // open: true,
         hot: true
     },
     plugins: [
-        // new HtmlWebpackPlugin({
-        //     title: 'Home page',
-        //     // minify: {
-        //     //     collapseWhitespace: true
-        //     // },
-        //     hash: true,
-        //     excludeChunks: ['contact'],
-        //     template: './src/templates/index.html'
-        // }),
-        // new HtmlWebpackPlugin({
-        //     title: 'Contact Page',
-        //     hash: true,
-        //     filename: 'contact.html',
-        //     chunks: ['contact'],
-        //     template: './src/templates/contact.pug'
-        // }),
+        /**
+         * order in array does matters: 0 - commons, 1 - vendors
+         */
+        new webpack.optimize.CommonsChunkPlugin({
+            names: ['vendors'],
+            minChunks: 2
+        }),
 
         new HtmlWebpackPlugin({
             inject: 'body',
             template: 'html-loader?interpolate!nunjucks-html-loader!' + path.resolve('./src', 'templates/index.nunj'),
+            chunks: [
+                'vendors',
+                'main'
+            ]
         }),
 
         new ExtractTextPlugin({
@@ -123,18 +115,17 @@ module.exports = {
         }),
 
         /**
-         * enable hot module reloading globally:
+         * To enable hot module reloading globally:
          */
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
 
         /**
-         * Give paths to parse for rules. These should be absolute:
-         * for now it now working properly with the plugin "ExtractTextPlugin":
+         * to remove unused styles or css classes:
          */
-        // new PurifyCSSPlugin({
-        //     paths: glob.sync(path.join(__dirname, 'src/*.html'))
-        // })
+        new PurifyCSSPlugin({
+            paths: glob.sync(path.join(__dirname, 'src/*.html'))
+        }),
 
         /**
          * to enable scope hoisting:
