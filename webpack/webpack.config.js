@@ -1,29 +1,32 @@
 'use strict';
 
-const HtmlWebpackPlugin = require('html-webpack-plugin'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin'),
-    path = require('path'),
-    webpack = require('webpack'),
-    bootstrapEntryPoints = require('./webpack.bootstrap.config'),
-    glob = require('glob'),
-    PurifyCSSPlugin = require('purifycss-webpack'),
-    isProd = process.env.NODE_ENV === 'production', // true or false
-    cssDev = ['style-loader', 'css-loader', 'sass-loader'],
-    cssProd = ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-
-        /**
-         * this publicPath cause problem with image loading in the production mode in css:
-         * the pathe of the image in the css: /distimages/[image file]
-         */
-        publicPath: '/dist',
-
-        use: ['css-loader', 'sass-loader']
-    });
+const path = require('path');
+const glob = require('glob');
+const webpack = require('webpack');
+const bootstrapEntryPoints = require('./webpack.bootstrap.config');
 
 /**
- * define the config either for production mode or development mode:
+ * Plugins
  */
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const PurifyCSSPlugin = require('purifycss-webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+/**
+ * define the config either for production mode or development mode
+ */
+const isProd = process.env.NODE_ENV === 'production'; // @return {boolean}
+const cssDev = ['style-loader', 'css-loader', 'sass-loader'];
+const cssProd = ExtractTextPlugin.extract({
+    fallback: 'style-loader',
+    /**
+     * this publicPath cause problem with image loading in the production mode in css
+     * the pathe of the image in the css /distimages/[image file]
+     */
+    publicPath: '/dist',
+
+    use: ['css-loader', 'sass-loader']
+});
 const cssConfig = isProd ? cssProd : cssDev;
 const bootstrapConfig = isProd ? bootstrapEntryPoints.prod : bootstrapEntryPoints.dev;
 
@@ -92,7 +95,7 @@ module.exports = {
     },
     plugins: [
         /**
-         * order in array does matters: 0 - commons, 1 - vendors
+         * order in array does matters 0 - commons, 1 - vendors
          */
         new webpack.optimize.CommonsChunkPlugin({
             names: ['vendors'],
@@ -115,20 +118,20 @@ module.exports = {
         }),
 
         /**
-         * To enable hot module reloading globally:
+         * To enable hot module reloading globally
          */
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
 
         /**
-         * to remove unused styles or css classes:
+         * to remove unused styles or css classes
          */
         new PurifyCSSPlugin({
             paths: glob.sync(path.join(__dirname, 'src/*.html'))
         }),
 
         /**
-         * to enable scope hoisting:
+         * to enable scope hoisting
          */
         new webpack.optimize.ModuleConcatenationPlugin()
     ]
