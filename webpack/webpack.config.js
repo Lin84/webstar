@@ -11,6 +11,10 @@ const bootstrapEntryPoints = require('./webpack.bootstrap.config');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+const ModuleConcatenationPlugin = webpack.optimize.ModuleConcatenationPlugin;
+const HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin;
+const NamedModulesPlugin = webpack.NamedModulesPlugin;
 
 /**
  * define the config either for production mode or development mode
@@ -32,17 +36,26 @@ const bootstrapConfig = isProd ? bootstrapEntryPoints.prod : bootstrapEntryPoint
 
 module.exports = {
     entry: {
-        main: './src/scrips/main.js',
-        vendors: [
+        vendor: [
             bootstrapConfig
-        ]
+        ],
+        main: './src/scrips/main.js'
     },
+
     output: {
         path: path.resolve(__dirname + './../dist'),
         filename: 'scrips/[name].bundle.js'
     },
+
     module: {
         rules: [
+            // {
+            //     test: /\.css$/,
+            //     use: ExtractTextPlugin.extract({
+            //         fallback: 'style-loader',
+            //         use: 'css-loader'
+            //     })
+            // },
             {
                 test: /\.scss$/,
                 use: cssConfig
@@ -86,6 +99,7 @@ module.exports = {
             }
         ]
     },
+
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
         compress: false,
@@ -93,20 +107,23 @@ module.exports = {
         stats: 'errors-only',
         hot: true
     },
+
     plugins: [
         /**
-         * order in array does matters 0 - commons, 1 - vendors
+         * the set up of 2 plugins below help to set the custom loading scripts order in the HTML:
          */
-        new webpack.optimize.CommonsChunkPlugin({
-            names: ['vendors'],
+        // order in array does matters 0 - commons, 1 - vendor:
+        new CommonsChunkPlugin({
+            names: ['common', 'vendor'],
             minChunks: 2
         }),
 
         new HtmlWebpackPlugin({
             inject: 'body',
             template: 'html-loader?interpolate!nunjucks-html-loader!' + path.resolve('./src', 'templates/index.nunj'),
+             // order in array here doesn't matters:
             chunks: [
-                'vendors',
+                'vendor',
                 'main'
             ]
         }),
@@ -120,8 +137,8 @@ module.exports = {
         /**
          * To enable hot module reloading globally
          */
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin(),
+        new HotModuleReplacementPlugin(),
+        new NamedModulesPlugin(),
 
         /**
          * to remove unused styles or css classes
@@ -133,6 +150,6 @@ module.exports = {
         /**
          * to enable scope hoisting
          */
-        new webpack.optimize.ModuleConcatenationPlugin()
+        new ModuleConcatenationPlugin()
     ]
 }
