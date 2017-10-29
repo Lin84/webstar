@@ -7,7 +7,10 @@
     "dev": "webpack-dev-server --config ./webpack/webpack.config.js",
     "build": "npm run clean && NODE_ENV=production webpack --config ./webpack/webpack.config.js -p",
     "clean": "rimraf ./dist/*",
-    "test": "jest"
+    "test": "jest",
+    "test-coverage": "jest --coverage",
+    "test-watch": "jest --watch",
+    "test-coverage-watch": "jest --coverage --watch"
   },
   "keywords": [
     "webpack",
@@ -26,6 +29,7 @@
     "bootstrap-loader": "^2.2.0",
     "bootstrap-sass": "^3.3.7",
     "css-loader": "^0.28.5",
+    "enzyme": "^3.1.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
     "html-loader": "^0.5.1",
@@ -53,5 +57,11 @@
     "url-loader": "^0.5.9",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1"
+  },
+  "jest": {
+    "coverageReporters": [
+      "html",
+      "text"
+    ]
   }
 }

@@ -51,3 +51,6 @@ dwsync.xml
 intermediate
 publish
 .idea
+
+# testing
+coverage
