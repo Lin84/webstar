@@ -1,5 +1,5 @@
 # webstar
-Development starter kit with webpack 3
+Development devstack with webpack 3 and Jest
 
 ## Getting started
 ### Preparations
@@ -44,4 +44,29 @@ To prepare production-ready files, grab built assets from `dist` folder after ru
 
 ```sh
 npm run build
+```
+## Testing with Jest
+### Run basic test
+in the terminal run:
+
+```sh
+npm run test
+```
+### Run test in watch mode
+in the terminal run:
+
+```sh
+npm run test-w
+```
+### Run test in coverage mode
+in the terminal run:
+
+```sh
+npm run test-c
+```
+### Run test in watch mode and coverage mode
+in the terminal run:
+
+```sh
+npm run test-w-c
 ```
