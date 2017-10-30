@@ -1,73 +1,81 @@
 {
-  "name": "web-star",
-  "version": "1.0.0",
-  "description": "create the development start kit with webpack",
-  "main": "main.js",
-  "scripts": {
-    "dev": "webpack-dev-server --config ./webpack/webpack.config.js",
-    "build": "npm run clean && NODE_ENV=production webpack --config ./webpack/webpack.config.js -p",
-    "clean": "rimraf ./dist/*",
-    "test": "jest",
-    "test-coverage": "jest --coverage",
-    "test-watch": "jest --watch",
-    "test-coverage-watch": "jest --coverage --watch"
-  },
-  "keywords": [
-    "webpack",
-    "startkit"
-  ],
-  "author": "Linh Le Tuan",
-  "license": "ISC",
-  "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-core": "^6.26.0",
-    "babel-jest": "^21.2.0",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-latest": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "bootstrap-loader": "^2.2.0",
-    "bootstrap-sass": "^3.3.7",
-    "css-loader": "^0.28.5",
-    "enzyme": "^3.1.0",
-    "extract-text-webpack-plugin": "^3.0.0",
-    "file-loader": "^0.11.2",
-    "html-loader": "^0.5.1",
-    "html-webpack-plugin": "^2.30.1",
-    "image-webpack-loader": "^3.3.1",
-    "imports-loader": "^0.7.1",
-    "jest": "^21.2.1",
-    "jest-cli": "^21.2.1",
-    "jquery": "^3.2.1",
-    "node-sass": "^4.5.3",
-    "nunjucks": "^3.0.1",
-    "nunjucks-html-loader": "^1.1.0",
-    "purify-css": "^1.2.5",
-    "purifycss-webpack": "^0.7.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-redux": "^5.0.5",
-    "react-test-renderer": "^16.0.0",
-    "redux": "^3.7.0",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0",
-    "regenerator-runtime": "^0.11.0",
-    "resolve-url-loader": "^2.1.0",
-    "rimraf": "^2.6.1",
-    "sass-loader": "^6.0.6",
-    "style-loader": "^0.18.2",
-    "url-loader": "^0.5.9",
-    "webpack": "^3.5.5",
-    "webpack-dev-server": "^2.7.1"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "coverageReporters": [
-      "html",
-      "text"
+    "name": "web-star",
+    "version": "1.0.0",
+    "description": "create the development start kit with webpack",
+    "main": "main.js",
+    "scripts": {
+        "dev": "webpack-dev-server --config ./webpack/webpack.config.js",
+        "build": "npm run clean && NODE_ENV=production webpack --config ./webpack/webpack.config.js -p",
+        "clean": "rimraf ./dist/*",
+        "test": "jest",
+        "test-coverage": "jest --coverage",
+        "test-watch": "jest --watch",
+        "test-coverage-watch": "jest --coverage --watch"
+    },
+    "keywords": [
+        "webpack",
+        "startkit"
     ],
-    "collectCoverageFrom": [
-        "src/**/*.js"
-    ]
-  }
+    "author": "Linh Le Tuan",
+    "license": "ISC",
+    "devDependencies": {
+        "babel": "^6.23.0",
+        "babel-core": "^6.26.0",
+        "babel-jest": "^21.2.0",
+        "babel-loader": "^7.1.2",
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "babel-preset-latest": "^6.24.1",
+        "babel-preset-react": "^6.24.1",
+        "bootstrap-loader": "^2.2.0",
+        "bootstrap-sass": "^3.3.7",
+        "css-loader": "^0.28.5",
+        "enzyme": "^3.1.0",
+        "extract-text-webpack-plugin": "^3.0.0",
+        "file-loader": "^0.11.2",
+        "html-loader": "^0.5.1",
+        "html-webpack-plugin": "^2.30.1",
+        "image-webpack-loader": "^3.3.1",
+        "imports-loader": "^0.7.1",
+        "jest": "^21.2.1",
+        "jest-cli": "^21.2.1",
+        "jquery": "^3.2.1",
+        "node-sass": "^4.5.3",
+        "nunjucks": "^3.0.1",
+        "nunjucks-html-loader": "^1.1.0",
+        "purify-css": "^1.2.5",
+        "purifycss-webpack": "^0.7.0",
+        "react": "^16.0.0",
+        "react-dom": "^16.0.0",
+        "react-redux": "^5.0.5",
+        "react-test-renderer": "^16.0.0",
+        "redux": "^3.7.0",
+        "redux-logger": "^3.0.6",
+        "redux-thunk": "^2.2.0",
+        "regenerator-runtime": "^0.11.0",
+        "resolve-url-loader": "^2.1.0",
+        "rimraf": "^2.6.1",
+        "sass-loader": "^6.0.6",
+        "style-loader": "^0.18.2",
+        "url-loader": "^0.5.9",
+        "webpack": "^3.5.5",
+        "webpack-dev-server": "^2.7.1"
+    },
+    "jest": {
+        "testEnvironment": "node",
+        "coverageReporters": [
+            "html",
+            "text"
+        ],
+        "collectCoverageFrom": [
+            "src/**/*.js"
+        ],
+        "coverageThreshold": {
+            "global": {
+                "branches": 100,
+                "functions": 100,
+                "lines": 100,
+                "statements": 100
+            }
+        }
+    }
 }
