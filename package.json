@@ -8,9 +8,9 @@
         "build": "npm run clean && NODE_ENV=production webpack --config ./webpack/webpack.config.js -p",
         "clean": "rimraf ./dist/*",
         "test": "jest",
-        "test-coverage": "jest --coverage",
-        "test-watch": "jest --watch",
-        "test-coverage-watch": "jest --coverage --watch"
+        "test-c": "jest --coverage",
+        "test-w": "jest --watch",
+        "test-w-c": "jest --watch --coverage"
     },
     "keywords": [
         "webpack",
