@@ -15,7 +15,7 @@ import Link from './components/_common/Link';
 const app = (config) => {
     const store = configureStore(config);
 
-    render(Headline, document.querySelector('#root'));
+    render(Headline, document.querySelector('#headline'));
     renderFactory(Link, document.querySelectorAll('.link'));
     renderFactory(PlusOne, document.querySelectorAll('.plus-one'), {}, store);
 };
