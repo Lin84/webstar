@@ -28,8 +28,42 @@ import Button from './index';
 //     })
 // })
 
-const wrapper = shallow(<Button />)
+const createTestProps = props => ({
+    label: 'Submit',
+    ...props
+});
 
-it('should render a <Button />', () => {
-    expect(wrapper.find('Button')).toHaveLength(1)
-})
+describe('rendering', () => {
+    let wrapper;
+    const createWrapper = props => shallow(<Button {...props}/>);
+    beforeEach(() => {
+        // wrapper = shallow(<Button label="Submit" />);
+        const props = createTestProps()
+        wrapper = createWrapper(props);
+    })
+
+    it('should render a <Button />', () => {
+        expect(wrapper.find('button')).toHaveLength(1);
+    });
+
+    it('should render a label', () => {
+        expect(wrapper.find('button').contains('Submit')).toBe(true);
+    });
+
+    describe('no type', () => {
+        it('should have default styles', () => {
+            expect(wrapper.find('button').hasClass('btn-default')).toBe(true);
+        });
+    });
+
+    describe('primary type', () => {
+        beforeEach(() => {
+            const props = createTestProps({class: 'btn-primary'})
+            wrapper = createWrapper(props);
+        });
+
+        it('should have primary styles', () => {
+            expect(wrapper.find('button').hasClass('btn-primary')).toBe(true);
+        });
+    });
+});

@@ -17,12 +17,12 @@ const app = config => {
     const store = configureStore(config);
 
     render(Headline, document.querySelector('#headline'), { text: 'hello' });
-    renderFactory(Button, document.querySelectorAll('.button'), {
-        class: 'btn btn-primary',
-        label: 'Submit',
-    });
     renderFactory(Link, document.querySelectorAll('.link'));
     renderFactory(PlusOne, document.querySelectorAll('.plus-one'), {}, store);
+    renderFactory(Button, document.querySelectorAll('.button'), {
+        class: 'btn btn-primary',
+        label: 'Submit'
+    });
 };
 
 app(window.config);
