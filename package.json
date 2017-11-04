@@ -30,7 +30,7 @@
         "bootstrap-sass": "^3.3.7",
         "css-loader": "^0.28.5",
         "enzyme": "^3.1.0",
-        "enzyme-adapter-react-16": "^1.0.2",
+        "enzyme-adapter-react-16": "^1.0.3",
         "enzyme-to-json": "^3.1.4",
         "extract-text-webpack-plugin": "^3.0.0",
         "file-loader": "^0.11.2",
@@ -61,23 +61,5 @@
         "url-loader": "^0.5.9",
         "webpack": "^3.5.5",
         "webpack-dev-server": "^2.7.1"
-    },
-    "jest": {
-        "testEnvironment": "node",
-        "coverageReporters": [
-            "html",
-            "text"
-        ],
-        "collectCoverageFrom": [
-            "src/**/*.js"
-        ],
-        "coverageThreshold": {
-            "global": {
-                "branches": 100,
-                "functions": 100,
-                "lines": 100,
-                "statements": 100
-            }
-        }
     }
 }

@@ -13,19 +13,26 @@
                 <div id="headline"></div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4">
+        <ul class="list-group">
+            <li class="list-group-item">
                 <img src="./../images/svg/adoption.svg" alt="">
-            </div>
-            <div class="col-md-8">
+            </li>
+            <li class="list-group-item">
                 {% include "./partials/modal.nunj" %}
+            </li>
+            <li class="list-group-item">
                 {% include "./partials/dropdown.nunj" %}
-            </div>
-        </div>
-
-        <div class="plus-one"></div>
-
-        <div class="link"></div>
+            </li>
+            <li class="list-group-item">
+                <div class="plus-one"></div>
+            </li>
+            <li class="list-group-item">
+                <div class="button"></div>
+            </li>
+            <li class="list-group-item">
+                <div class="link">hello</div>
+            </li>
+        </ul>
     </div>
 </body>
 </html>

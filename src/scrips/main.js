@@ -11,11 +11,16 @@ import { render, renderFactory } from './ultilities/render';
 import Headline from './components/_common/Headline';
 import PlusOne from './components/plus-one/PlusOne';
 import Link from './components/_common/Link';
+import Button from './components/_common/Button';
 
-const app = (config) => {
+const app = config => {
     const store = configureStore(config);
 
-    render(Headline, document.querySelector('#headline'));
+    render(Headline, document.querySelector('#headline'), { text: 'hello' });
+    renderFactory(Button, document.querySelectorAll('.button'), {
+        class: 'btn btn-primary',
+        label: 'Submit',
+    });
     renderFactory(Link, document.querySelectorAll('.link'));
     renderFactory(PlusOne, document.querySelectorAll('.plus-one'), {}, store);
 };
