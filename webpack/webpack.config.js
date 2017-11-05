@@ -91,7 +91,8 @@ module.exports = {
                         loader: 'nunjucks-html-loader',
                         options: {
                             'searchPaths': [
-                                'src/templates'
+                                'src/templates',
+                                'src/templates/partials'
                             ],
                         },
                     },
