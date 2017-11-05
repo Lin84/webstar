@@ -11,5 +11,6 @@ module.exports = {
     },
     coverageDirectory: '<rootDir>/test/coverage',
     setupFiles: ['./test/jestsetup.js'],
-    snapshotSerializers: ['enzyme-to-json/serializer']
+    snapshotSerializers: ['enzyme-to-json/serializer'],
+    collectCoverageFrom: ['src/scrips/components/_common/**/*.js']
 };
