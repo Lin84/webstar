@@ -14,6 +14,7 @@ import Button from './index';
 
 /**
  * @param {object} props
+ * @return {object}
  */
 const createTestProps = props => ({
     label: 'Submit',
@@ -22,6 +23,7 @@ const createTestProps = props => ({
 
 /**
  * @param {object} props
+ * @return {wrapper} contains shallow component
  */
 const createWrapper = props => shallow(<Button {...props}/>);
 
