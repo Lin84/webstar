@@ -20,7 +20,7 @@ const app = config => {
     const store = configureStore(config);
 
     // Demo render react component once:
-    render(Headline, document.querySelector('#headline'), { text: 'hello' });
+    render(Headline, document.querySelector('#headline'), { label: 'Hello' });
 
     // Demo render react component more times:
     renderFactory(Link, document.querySelectorAll('.link'));

@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 
 const Headline = (props) => {
     return (
-        <h1 className="headline">{props.text}</h1>
+        <h1 className="headline">{props.label}</h1>
     );
 };
 
 Headline.propTypes = {
-    text: PropTypes.string.isRequired
+    label: PropTypes.string.isRequired
 };
 
 Headline.defaultProps = {
-    text: 'Headline'
+    label: 'Headline'
 };
 
 export default Headline;

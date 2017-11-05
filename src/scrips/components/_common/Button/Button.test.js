@@ -40,7 +40,9 @@ describe('rendering', () => {
     });
 
     it('should render a label', () => {
-        expect(wrapper.find('button').contains('Submit')).toBe(true);
+        // expect(wrapper.find('button').contains('Submit')).toBe(true);
+        // or:
+        expect(wrapper.find('button').text()).toEqual('Submit');
     });
 
     describe('no type', () => {
