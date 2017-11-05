@@ -15,6 +15,7 @@ const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 const ModuleConcatenationPlugin = webpack.optimize.ModuleConcatenationPlugin;
 const HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin;
 const NamedModulesPlugin = webpack.NamedModulesPlugin;
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 /**
  * define the config either for production mode or development mode
@@ -151,6 +152,23 @@ module.exports = {
         /**
          * to enable scope hoisting
          */
-        new ModuleConcatenationPlugin()
+        new ModuleConcatenationPlugin(),
+        new BrowserSyncPlugin(
+            // BrowserSync options
+            {
+                host: 'localhost',
+                port: 3000,
+                // proxy the Webpack Dev Server endpoint
+                // (which should be serving on http://localhost:3100/)
+                // through BrowserSync
+                proxy: 'http://localhost:1111/'
+            },
+            // plugin options
+            {
+                // prevent BrowserSync from reloading the page
+                // and let Webpack Dev Server take care of this
+                reload: true
+            }
+        )
     ]
 }
