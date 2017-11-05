@@ -7,39 +7,28 @@
  * describe('lifecycle'):
  * contains tests related to react lifecycle functions
  */
+
 import React from 'react';
 import { shallow } from 'enzyme';
 import Button from './index';
 
-// describe('Rendering Butaton', () => {
-//     it('should render a <Button />')
-//     it('should render a label')
-//     describe('no type', () => {
-//         it('should have the default style')
-//     })
-//     describe('primary type', () => {
-//         it('should have the primary style');
-//     });
-// });
-
-// describe('Interaction', () => {
-//     describe('clicking the button', () => {
-//         it('should call the onClick callback')
-//     })
-// })
-
+/**
+ * @param {object} props
+ */
 const createTestProps = props => ({
     label: 'Submit',
     ...props
 });
 
+/**
+ * @param {object} props
+ */
 const createWrapper = props => shallow(<Button {...props}/>);
 
 describe('rendering', () => {
     let wrapper;
-    // const createWrapper = props => shallow(<Button {...props}/>);
+
     beforeEach(() => {
-        // wrapper = shallow(<Button label="Submit" />);
         const props = createTestProps()
         wrapper = createWrapper(props);
     })
