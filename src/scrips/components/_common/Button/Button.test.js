@@ -33,9 +33,11 @@ const createTestProps = props => ({
     ...props
 });
 
+const createWrapper = props => shallow(<Button {...props}/>);
+
 describe('rendering', () => {
     let wrapper;
-    const createWrapper = props => shallow(<Button {...props}/>);
+    // const createWrapper = props => shallow(<Button {...props}/>);
     beforeEach(() => {
         // wrapper = shallow(<Button label="Submit" />);
         const props = createTestProps()
@@ -67,3 +69,22 @@ describe('rendering', () => {
         });
     });
 });
+
+describe('interaction', () => {
+    let wrapper;
+    let props;
+
+    beforeEach(() => {
+        props = createTestProps({ handleClick: jest.fn()});
+        wrapper = createWrapper(props);
+    });
+
+    describe('clicking the button', () => {
+        beforeEach(() => {
+            wrapper.find('button').prop('onClick')();
+        });
+        it('should call the onClick callBack', () => {
+            expect(props.handleClick).toHaveBeenCalledTimes(1);
+        })
+    })
+})
