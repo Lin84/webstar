@@ -4,35 +4,25 @@ const path = require('path');
 const glob = require('glob');
 const webpack = require('webpack');
 const bootstrapEntryPoints = require('./webpack.bootstrap.config');
+const cssConfig = require('./css.config');
 
 /**
- * Plugins
+ * Plugins:
  */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 const ModuleConcatenationPlugin = webpack.optimize.ModuleConcatenationPlugin;
 const HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin;
 const NamedModulesPlugin = webpack.NamedModulesPlugin;
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 /**
  * define the config either for production mode or development mode
  */
 const isProd = process.env.NODE_ENV === 'production'; // @return {boolean}
-const cssDev = ['style-loader', 'css-loader', 'sass-loader'];
-const cssProd = ExtractTextPlugin.extract({
-    fallback: 'style-loader',
-    /**
-     * this publicPath cause problem with image loading in the production mode in css
-     * the pathe of the image in the css /distimages/[image file]
-     */
-    publicPath: '/dist',
-
-    use: ['css-loader', 'sass-loader']
-});
-const cssConfig = isProd ? cssProd : cssDev;
+const cssSetup = isProd ? cssConfig.prod : cssConfig.dev;
 const bootstrapConfig = isProd ? bootstrapEntryPoints.prod : bootstrapEntryPoints.dev;
 
 module.exports = {
@@ -50,16 +40,9 @@ module.exports = {
 
     module: {
         rules: [
-            // {
-            //     test: /\.css$/,
-            //     use: ExtractTextPlugin.extract({
-            //         fallback: 'style-loader',
-            //         use: 'css-loader'
-            //     })
-            // },
             {
                 test: /\.scss$/,
-                use: cssConfig
+                use: cssSetup
             },
             {
                 test: /\.js$/,
@@ -138,6 +121,7 @@ module.exports = {
 
         /**
          * To enable hot module reloading globally
+         * currently does not work with browser sync
          */
         new HotModuleReplacementPlugin(),
         new NamedModulesPlugin(),
@@ -153,6 +137,7 @@ module.exports = {
          * to enable scope hoisting
          */
         new ModuleConcatenationPlugin(),
+
         new BrowserSyncPlugin(
             // BrowserSync options
             {
