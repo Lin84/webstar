@@ -145,7 +145,7 @@ module.exports = {
                 host: 'localhost',
                 port: 3000,
                 // proxy the Webpack Dev Server endpoint
-                // (which should be serving on http://localhost:3100/)
+                // (which should be serving on http://localhost:1111/)
                 // through BrowserSync
                 proxy: 'http://localhost:1111/'
             },
