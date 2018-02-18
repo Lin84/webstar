@@ -31,12 +31,12 @@ module.exports = {
         vendor: [
             bootstrapConfig
         ],
-        main: './src/scrips/main.js'
+        main: './src/scripts/main.js'
     },
 
     output: {
         path: path.resolve(__dirname + './../dist'),
-        filename: 'scrips/[name].bundle.js'
+        filename: 'scripts/[name].bundle.js'
     },
 
     module: {
