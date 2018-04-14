@@ -8,13 +8,16 @@
         "build": "npm run clean && NODE_ENV=production webpack --config ./webpack/webpack.config.js -p",
         "clean": "rimraf ./dist/*",
         "test": "jest",
-        "test-c": "jest --coverage",
-        "test-w": "jest --watch",
-        "test-w-c": "jest --watch --coverage"
+        "test:c": "jest --coverage",
+        "test:w": "jest --watch",
+        "test:w:c": "jest --watch --coverage",
+        "json:server": "json-server --watch ./src/api/db.js",
+        "dev:server": "concurrently --kill-others \"npm run dev\" \"npm run json:server\""
     },
     "keywords": [
         "webpack",
-        "jest"
+        "jest",
+        "json-server"
     ],
     "author": "Linh Le Tuan",
     "license": "ISC",
@@ -64,5 +67,9 @@
         "url-loader": "^0.5.9",
         "webpack": "^3.5.5",
         "webpack-dev-server": "^2.7.1"
+    },
+    "dependencies": {
+        "concurrently": "^3.5.1",
+        "json-server": "^0.12.1"
     }
 }
