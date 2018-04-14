@@ -6,7 +6,7 @@ const routes = [
     {
         method: 'get',
         url: '/simple-get',
-        json: { data: testData }
+        json: testData
     },
 ]
 
