@@ -89,7 +89,7 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
         compress: false,
-        port: 1111,
+        port: 8484,
         stats: 'errors-only',
         hot: true
     },
@@ -147,7 +147,7 @@ module.exports = {
                 // proxy the Webpack Dev Server endpoint
                 // (which should be serving on http://localhost:1111/)
                 // through BrowserSync
-                proxy: 'http://localhost:1111/'
+                proxy: 'http://localhost:8484/'
             },
             // plugin options
             {
