@@ -11,8 +11,4 @@ Headline.propTypes = {
     label: PropTypes.string.isRequired
 };
 
-Headline.defaultProps = {
-    label: 'Headline'
-};
-
 export default Headline;

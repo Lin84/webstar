@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import { increment } from './actions';
 
 class PlusOne extends Component {
@@ -30,11 +31,13 @@ class PlusOne extends Component {
 }
 
 PlusOne.defaultProps = {
-    counter: 1
+    counter: 1,
+    increment: () => {}
 };
 
 PlusOne.propTypes = {
-    counter: PropTypes.number
+    counter: PropTypes.number,
+    increment: PropTypes.func
 };
 
 export default connect(

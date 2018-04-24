@@ -29,9 +29,6 @@
             <li class="list-group-item">
                 <div class="button"></div>
             </li>
-            <li class="list-group-item">
-                <div class="link">hello</div>
-            </li>
         </ul>
     </div>
 </body>
