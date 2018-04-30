@@ -4,7 +4,7 @@
     "description": "create the development start kit with webpack",
     "main": "main.js",
     "scripts": {
-        "build": "yarn clean && NODE_ENV=production webpack --config ./webpack/webpack.config.js -p",
+        "build": "npm run clean && NODE_ENV=production webpack --config ./webpack/webpack.config.js -p",
         "clean": "rimraf ./dist/*",
         "dev": "concurrently --kill-others \"yarn dev\" \"yarn json:mokker\"",
         "json:mokker": "node ./server/server.js",
